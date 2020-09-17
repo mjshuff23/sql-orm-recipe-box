@@ -20,7 +20,7 @@
   },
   "scripts": {
     "s": "sequelize-cli",
-    "dev": "nodemon",
+    "dev": "nodemon ",
     "start": "node server/index.js",
     "test": "mocha"
   },
