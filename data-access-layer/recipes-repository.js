@@ -79,6 +79,8 @@ async function deleteRecipe(id) {
   // saw in the video.
   //
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-destroy
+  const recipe = await Recipe.findByPk(id);
+  await recipe.destroy();
 }
 
 async function createNewRecipe(title) {
@@ -86,6 +88,9 @@ async function createNewRecipe(title) {
   // return it.
   //
   // Docs: https://sequelize.org/v5/manual/instances.html#creating-persistent-instances
+  const recipe = await Recipe.create({
+
+  });
 }
 
 async function searchRecipes(term) {
