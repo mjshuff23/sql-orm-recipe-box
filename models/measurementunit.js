@@ -1,4 +1,4 @@
-'use strict';
+n'use strict';
 module.exports = (sequelize, DataTypes) => {
   const MeasurementUnit = sequelize.define('MeasurementUnit', {
     name: DataTypes.STRING
