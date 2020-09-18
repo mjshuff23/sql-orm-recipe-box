@@ -34,12 +34,26 @@ async function getTenNewestRecipes() {
   // });
   //
   // Docs: https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll
+  const recipes = await Recipe.findAll({
+    limit: 10
+  })
+  recipes.forEach(recipe => console.log(recipe));
 }
 
 async function getRecipeById(id) {
   // Use the findByPk method of the Recipe object to return the recipe. Use
   // nested eager loading to load the associated instructions, ingredients, and
   // measurement units.
+
+  const recipe = recipe.findByPk(1, {
+    include: [
+      MeasurementUnit,
+      {
+        model: Instruction,
+        include: [Ingredient]
+      }
+    ]
+  })
   //
   // In the video, you saw this, where the presenter had to use the "include"
   // directive. The general form for calling and of the "find" methods with
@@ -89,8 +103,9 @@ async function createNewRecipe(title) {
   //
   // Docs: https://sequelize.org/v5/manual/instances.html#creating-persistent-instances
   const recipe = await Recipe.create({
-
+    title: title
   });
+  return recipe;
 }
 
 async function searchRecipes(term) {
@@ -98,6 +113,14 @@ async function searchRecipes(term) {
   // given term in its title
   //
   // Docs: https://sequelize.org/v5/manual/querying.html
+  const recipes = await Recipe.findAll({
+    where: {
+      title: {
+        [Op.substring]: term
+      }
+    }
+  })
+  recipes.forEach(recipe => console.log(recipe));
 }
 
 
